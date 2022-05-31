@@ -6,11 +6,15 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="FileStorage" />
+        <module name="file-storage-application" />
+        <module name="file-storage-server" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="FileStorage" target="18" />
+      <module name="demo" target="16" />
+      <module name="file-storage-application" target="16" />
+      <module name="file-storage-server" target="16" />
+      <module name="FileStorage" target="16" />
     </bytecodeTargetLevel>
   </component>
 </project>

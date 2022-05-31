@@ -4,14 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.example</groupId>
-    <artifactId>FileStorage</artifactId>
-    <packaging>pom</packaging>
+    <groupId>file-storage</groupId>
+    <artifactId>file-storage-application</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <modules>
-        <module>file-storage-server</module>
-    </modules>
-    <name>FileStorage</name>
+    <name>file-storage-application</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -64,7 +60,9 @@
                         <!-- Default configuration for running with: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.example.filestorage/com.example.filestorage.HelloApplication</mainClass>
+                            <mainClass>
+                                filestorage.filestorageapplication/filestorage.application.CloudStorageApplication
+                            </mainClass>
                         </configuration>
                     </execution>
                 </executions>
