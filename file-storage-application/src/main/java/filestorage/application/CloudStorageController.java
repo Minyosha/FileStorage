@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
@@ -27,10 +28,17 @@ public class CloudStorageController implements Initializable {
     public Button copyFromServerButton;
 
     @FXML
+    public ListView<String> clientList;
+
+    @FXML
     public ListView<String> serverView;
 
     @FXML
     public ListView<String> clientView;
+
+    public File fileFromSrv;
+
+
 
 
     public void upload(ActionEvent actionEvent) throws IOException {
@@ -65,6 +73,9 @@ public class CloudStorageController implements Initializable {
                         Platform.runLater(() -> serverView.getItems().add(file));
                     }
                 }
+                if (command.equals("#received")) {
+                    saveFileToClient(fileFromSrv);
+                }
             }
         } catch (Exception e) {
             System.err.println("Connection lost");
@@ -91,6 +102,28 @@ public class CloudStorageController implements Initializable {
         String[] list = new File(dir).list();
         assert list != null;
         return Arrays.asList(list);
+    }
+
+
+    public void saveFileToClient(File file) throws IOException {
+        buf = new byte[256];
+        long len = network.getIs().readLong();
+        try (FileOutputStream fos = new FileOutputStream(file)) {
+            int count;
+            if ((count = network.getIs().read(buf)) != -1) {
+                fos.write(buf, 0, count);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                clientList.getItems().clear();
+                clientList.getItems().addAll(getFiles(homeDir));
+                ;
+            }
+        });
     }
 
 }

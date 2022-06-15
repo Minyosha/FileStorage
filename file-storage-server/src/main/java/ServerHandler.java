@@ -15,12 +15,6 @@ public class ServerHandler implements Runnable{
         os = new DataOutputStream(socket.getOutputStream());
         System.out.println("Client accepted");
         sendListOfFiles(serverDir);
-
-//        List<String> files = getFiles(serverDir);
-//        for (String file : files) {
-//            os.writeUTF(file);
-//        }
-//        os.flush();
     }
 
     @Override
